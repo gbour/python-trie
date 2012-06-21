@@ -125,3 +125,20 @@ class Trie:
         for k in other:
             del self[k]
         return self
+
+    def __startswith(self, key, prefix=''):
+        head = key[0]
+        if head in self.path:
+            node = self.path[head]
+        else:
+            return []
+
+        prefix += head
+        if len(key) > 1:
+            return node.__startswith(key[1:], prefix)
+        else:
+            return [prefix+value for value in node.keys()]
+
+    def startswith(self, key):
+        return self.__startswith(key)
+

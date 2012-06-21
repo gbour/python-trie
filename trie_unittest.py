@@ -109,5 +109,16 @@ class TestTrie(unittest.TestCase):
         self.assertTrue(self.trie.get("Foo"))
         self.assertTrue(self.trie.get("Food") is None)
 
+    def test_Startswith(self):
+        self.trie['lol']      = 1
+        self.trie['lautre']   = 1
+        self.trie['laurentz'] = 1
+        self.trie['foobar']   = 1
+
+        self.assertEquals(['laurentz','lautre','lol'], self.trie.startswith('l'))
+        self.assertEquals(['laurentz','lautre'], self.trie.startswith('la'))
+        self.assertEquals(['laurentz'], self.trie.startswith('laur'))
+        self.assertEquals([], self.trie.startswith('bar'))
+
 if __name__ == '__main__':
         unittest.main()
